@@ -82,12 +82,16 @@ const shoppingList = (function() {
   function handleItemCheckClicked() {
     $('.js-shopping-list').on('click', '.js-item-toggle', event => {
       const id = getItemIdFromElement(event.currentTarget);
-      store.findAndToggleChecked(id);
       // const store.this.id
-      api.updateItem(id, !item.checked);
+      console.log('store.item should be here ', store.items);
+      const updatedCheck = store.findById(id);
+      const checked = {checked: !updatedCheck.checked};
+      api.updateItem(id, checked, () => {
+      store.findAndUpdate(id, checked);
       render();
-    });
-  }
+      })
+    })
+  };
 
   function handleDeleteItemClicked() {
     // like in `handleItemCheckClicked`, we use event delegation

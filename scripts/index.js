@@ -10,7 +10,7 @@ $(document).ready(function() {
   });
 });
 
-store.items.push(Item.create('apples'));
+// store.items.push(Item.create('apples'));
 
 // api.getItems(items => {
 //   const item = items[0];
