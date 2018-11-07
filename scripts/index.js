@@ -3,13 +3,24 @@
 $(document).ready(function() {
   shoppingList.bindEventListeners();
   shoppingList.render();
+  api.getItems((items) => {
+    items.forEach((item) => store.addItem(item));
+    shoppingList.render();
+  });
 });
 
 store.items.push(Item.create('apples'));
 
+api.getItems((items) => {
+  const item = items[0];
 
-api.getItems(function(data) {
-  console.log(data);
+  api.updateItem(item.id, { name: 'foobar' }, () => {
+    console.log('updated!');
+  });
 });
 
-console.log(api.BASE_URL);
+// api.createItem('pears', (newItem) => {
+//   api.getItems((items) => {
+//     console.log(items);
+//   });
+// });
