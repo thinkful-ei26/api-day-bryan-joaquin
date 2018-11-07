@@ -4,8 +4,14 @@
 
 const api = (function() {
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/joaquin';
+
   const getItems = function(callback) {
     $.getJSON(BASE_URL + '/items', callback);
+    const item = store.items[0];
+    
+    // console.log('current name: ' + item.name);
+    // store.findAndUpdate(item.id, { name: 'foobar' });
+    // console.log('new name: ' + item.name);
   };
 
   const createItem = function(name, callback) {
@@ -18,8 +24,8 @@ const api = (function() {
       method: 'POST',
       contentType: 'application/json',
       data: newItem,
-      success: callback,
-      };
+      success: callback
+    };
 
     $.ajax(settings);
   };
@@ -31,14 +37,13 @@ const api = (function() {
       contentType: 'application/json',
       data: JSON.stringify(updateData),
       success: callback
-    }
+    };
     $.ajax(updateSettings);
   };
-  
+
   return {
     getItems,
     createItem,
     updateItem
   };
-
 })();
